@@ -1,0 +1,54 @@
+name: LFWA_Gender
+modality: vision
+task: classification
+
+# path: "/home/zx/nfs/server3/data/"
+path: "/home/zx/data/"
+size: 13000
+classes: 2
+
+scale: 140
+shape:
+  - 3
+  - ${case.data.scale}
+  - ${case.data.scale}
+
+# Preprocessing:
+normalize: True
+
+
+# calcualte the mean and std direactly
+# lfw_mean = [0.43920546770095825, 0.38308215141296387, 0.3424372375011444]
+# lfw_std = [0.29699915647506714, 0.27357128262519836, 0.2682678997516632]
+#
+mean:
+  - 0.439
+  - 0.383
+  - 0.342
+std:
+  - 0.297
+  - 0.273
+  - 0.268
+
+# Data Augmentations:
+augmentations_train:
+  RandomResizedCrop: ${case.data.scale}
+  RandomHorizontalFlip: 0.5
+augmentations_val:
+  Resize: ${case.data.scale}
+  # CenterCrop: 224
+
+augmentations_ats:
+  policy: 
+# Federated Learning specifics:
+default_clients: 100
+# partition: balanced # used for synthetic splits. Current options for synthetic split: balanced / unique-class
+# partition: unique-class # used for synthetic splits. Current options for synthetic split: balanced / unique-class
+partition: balanced
+examples_from_split: validation
+
+# Data-specific implementation constants:
+batch_size: 128
+caching: False
+defaults:
+  - db: none # Database Setup # use the cmd-line to activate the LMDB module with data.db=LMDB

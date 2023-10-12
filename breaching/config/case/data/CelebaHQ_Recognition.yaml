@@ -1,0 +1,54 @@
+name: CelebaHQ_Recognition
+modality: vision
+task: classification
+
+# path: "/home/zx/nfs/server3/data/"
+path: "/home/zx/data/"
+size: 1121
+classes: 50
+
+scale: 160
+shape:
+  - 3
+  - ${case.data.scale}
+  - ${case.data.scale}
+
+# Preprocessing:
+normalize: True
+
+
+# celeba_mean = [0.50612009, 0.42543493, 0.38282761] # https://blog.csdn.net/HuanCaoO/article/details/106965082
+# celeba_std = [0.26589054, 0.24521921, 0.24127836]
+
+mean:
+  - 0.506
+  - 0.425
+  - 0.382
+std:
+  - 0.265
+  - 0.245
+  - 0.241
+
+# Data Augmentations:
+augmentations_train:
+  # RandomResizedCrop: ${case.data.scale}
+  # RandomHorizontalFlip: 0.5
+  Resize: ${case.data.scale}
+augmentations_val:
+  Resize: ${case.data.scale}
+  # CenterCrop: 224
+
+augmentations_ats:
+  policy: 
+# Federated Learning specifics:
+default_clients: 10
+# partition: balanced # used for synthetic splits. Current options for synthetic split: balanced / unique-class
+# partition: unique-class # used for synthetic splits. Current options for synthetic split: balanced / unique-class
+partition: balanced
+examples_from_split: validation
+
+# Data-specific implementation constants:
+batch_size: 128
+caching: False
+defaults:
+  - db: none # Database Setup # use the cmd-line to activate the LMDB module with data.db=LMDB

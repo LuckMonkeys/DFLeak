@@ -1,0 +1,12 @@
+name: single_celebahq_recognition
+
+defaults:
+  - data: CelebaHQ_Recognition
+  - impl: default
+  - server: honest-but-curious
+  - user: local_gradient
+  - _self_
+model: FaceNet
+
+# Server and user:
+num_queries: 1

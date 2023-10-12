@@ -1,0 +1,86 @@
+
+diffusion:
+  #sample
+  clip_denoised: True
+  num_samples: 1
+  batch_size: 1
+
+  model_path: "./breaching/attacks/accelarate/guided_diffusion/models/256x256_diffusion.pt"
+  # model_path: "/home/zx/data/GitRepo/breaching/breaching/attacks/accelarate/guided_diffusion/models/256x256_diffusion_uncond.pt"
+  # model_path: "/home/zx/DifFace-master/weights/diffusion/iddpm_ffhq512_ema500000.pth"
+    
+  class_cond: True
+  # class_cond: True
+
+  use_ddim: True
+  timestep_respacing: "ddim250"
+  # use_ddim: False
+  # timestep_respacing: "250"
+
+  # classifier
+  classifier_path: "./breaching/attacks/accelarate/guided_diffusion/models/256x256_classifier.pt"
+  classifier_scale: 10.0
+
+  # gradient_attack_scale: 1000.0
+    
+  classifier_use_fp16: False
+  classifier_width: 128
+  classifier_depth: 2
+  classifier_attention_resolutions: "32,16,8"
+  classifier_use_scale_shift_norm: True
+  classifier_resblock_updown: True
+  classifier_pool: "attention"
+  
+  # model
+  image_size: 256
+  num_channels: 256
+  num_res_blocks: 2
+  num_heads: 4
+  num_heads_upsample: -1
+  num_head_channels: 64
+  attention_resolutions: "32,16,8"
+  channel_mult: ''
+  dropout: 0.0
+
+  use_checkpoint: False
+  use_scale_shift_norm: True
+  resblock_updown: True
+  use_fp16: True
+  use_new_attention_order: False
+  learn_sigma: True
+  diffusion_steps: 1000
+  noise_schedule: "linear"
+  use_kl: False
+  predict_xstart: False
+  rescale_timesteps: False
+  rescale_learned_sigmas: False
+    
+  #for diface model    
+  # image_size: 512
+  # num_channels: 32
+  # attention_resolutions: "16,32,64"
+  # dropout: 0.0
+  # num_res_blocks: [1, 2, 2, 2, 2, 3, 4]
+  # use_fp16: False
+  # num_head_channels: 64
+  # use_scale_shift_norm: True
+  # resblock_updown: False
+  # use_new_attention_order: False
+    
+  # num_heads: 4
+  # num_heads_upsample: -1
+  # channel_mult: ""
+  # use_checkpoint: False
+  
+
+  # diffusion_steps: 1000
+  # learn_sigma: True
+  # noise_schedule: "linear"
+  # use_kl: False
+  # predict_xstart: False
+  # rescale_timesteps: False
+  # rescale_learned_sigmas: True
+  
+  # use_ddim: True
+  # timestep_respacing: "ddim250"
+    

@@ -1,0 +1,36 @@
+# @package _global_
+# Configuration defaults
+# Settings are separated into case, attack analysis
+defaults:
+  - case: 2_single_imagenet
+  - attack: invertinggradients
+  - _self_
+  - override hydra/job_logging: custom
+
+base_dir: outputs
+hydra:
+  sweep:
+    dir: ${base_dir}/${name}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  run:
+    dir: ${base_dir}/${name}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+# To change output folder location:
+# Set hydra.output_subdir=something
+# searchpath:
+#   - pkg://
+
+seed: # Optional: Set initial seed
+# name: default # A name for this run [will be used for the summary table and outputs folder]
+name: ${case.name}_${case.model}_${attack.type}_${attack.init}_patch_${attack.optim.patched}_${attack.optim.max_iterations}_${attack.restarts.num_trials} # A name for this run [will be used for the summary table and outputs folder]
+
+# debug implementation by running every loop just once:
+dryrun: False
+
+# When benchmarking:
+num_trials: 100
+# save_reconstruction: False
+save_reconstruction: True
+save_local_summary: True
+save_global_summary: True
+
+
+state_dict_path: 
